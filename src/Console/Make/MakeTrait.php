@@ -42,7 +42,9 @@ class MakeTrait extends CustomGeneratorCommand
     protected function getDefaultNamespace($rootNamespace)
     {
 
-        return $rootNamespace . '\Traits';
+        return (empty(config('laravel-stubs.make.trait.namespace')))
+            ? $rootNamespace
+            : config('laravel-stubs.make.trait.namespace');
     }
 
     protected function getNameInput()

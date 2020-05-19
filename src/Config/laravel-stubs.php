@@ -7,7 +7,7 @@ return [
      */
     'create' => [
         /**
-         * Create:user
+         * create:user
          *
          * The field key has to correspond with the model field.
          * If the field is defined as an array the following fields are supported:
@@ -29,6 +29,25 @@ return [
                     'type' => 'secret'
                 ]
             ]
+        ]
+    ],
+
+    'make' => [
+        /**
+         * make:interface
+         *
+         * Allows you to change the namespace (and so the folder) where the interface will be stored
+         */
+        'interface' => [
+            'namespace' => '\App\Interfaces'
+        ],
+        /**
+         * make:trait
+         *
+         * Allows you to change the namespace (and so the folder) where the interface will be stored
+         */
+        'trait' => [
+            'namespace' => '\App\Traits'
         ]
     ]
 ];

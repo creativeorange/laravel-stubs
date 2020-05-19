@@ -39,7 +39,9 @@ class MakeInterface extends CustomGeneratorCommand
     protected function getDefaultNamespace($rootNamespace)
     {
 
-        return $rootNamespace . '\Interfaces';
+        return (empty(config('laravel-stubs.make.interface.namespace')))
+            ? $rootNamespace
+            : config('laravel-stubs.make.interface.namespace');
     }
 
     protected function getNameInput()

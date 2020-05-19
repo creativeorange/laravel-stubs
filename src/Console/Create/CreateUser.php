@@ -38,14 +38,15 @@ class CreateUser extends Command
     public function handle()
     {
 
-        $model = config('laravel-stub.create.user.model');
+        $model = config('laravel-stubs.create.user.model');
+        \var_dump($model);
 
         if (!\class_exists($model)) {
 
             return $this->error('Model does not exist.');
         }
 
-        $fields = config('laravel-stub.create.user.fields');
+        $fields = config('laravel-stubs.create.user.fields');
 
         if (!\is_array($fields))
             $fields = [$fields];
@@ -80,9 +81,9 @@ class CreateUser extends Command
             }
         }
 
-        if (!empty(config('laravel-stub.create.user.unique')) &&
-            $model::where(config('laravel-stub.create.user.unique'),
-                            $saving[config('laravel-stub.create.user.unique')])->first()) {
+        if (!empty(config('laravel-stubs.create.user.unique')) &&
+            $model::where(config('laravel-stubs.create.user.unique'),
+                            $saving[config('laravel-stubs.create.user.unique')])->first()) {
 
             $this->error('This user already exists.');
         }

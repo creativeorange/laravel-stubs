@@ -25,13 +25,13 @@ class LaravelStubsServiceProvider extends ServiceProvider
         }
 
         $this->publishes([
-            __DIR__ . '/Config/laravel-stub.php' => base_path('config/laravel-stub.php')
+            __DIR__ . '/Config/laravel-stubs.php' => base_path('config/laravel-stubs.php')
         ], 'config');
     }
 
     public function register() {
 
 
-        $this->mergeConfigFrom(__DIR__ . '/Config/laravel-stub.php', 'laravel-stub');
+        $this->mergeConfigFrom(__DIR__ . '/Config/laravel-stubs.php', 'laravel-stubs');
     }
 }
