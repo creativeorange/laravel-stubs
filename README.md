@@ -1,6 +1,6 @@
 # laravel-stubs
 
-# Commands
+## Commands
 
 #### Create
 - create:user
