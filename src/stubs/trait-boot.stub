@@ -1,0 +1,22 @@
+<?php
+
+namespace DummyNamespace;
+
+trait DummyClass
+{
+
+    /**
+     * Bootstrap the trait.
+     *
+     * The following functions can be called statically:
+     * retrieved, creating, created, updating, updated,
+     * saving, saved, deleting, deleted, restoring, restored
+     *
+     * @return void
+     */
+    public static function bootDummyClass(): void
+    {
+
+
+    }
+}
