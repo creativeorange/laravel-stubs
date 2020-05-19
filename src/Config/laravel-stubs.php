@@ -3,7 +3,7 @@
 return [
 
     /**
-     * Configuration for the create commands
+     * Configuration for the create commands.
      */
     'create' => [
         /**
@@ -32,6 +32,9 @@ return [
         ]
     ],
 
+    /**
+     * Configuration for the make commands.
+     */
     'make' => [
         /**
          * make:interface
