@@ -33,7 +33,7 @@ class MakeInterface extends CustomGeneratorCommand
     protected function getStub()
     {
 
-        return $this->resolveStubPath('/stubs/interface.stub');
+        return $this->resolveStubPath('/../stubs/interface.stub');
     }
 
     protected function getDefaultNamespace($rootNamespace)

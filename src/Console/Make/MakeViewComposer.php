@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-class MakeTrait extends CustomGeneratorCommand
+class MakeViewComposer extends CustomGeneratorCommand
 {
 
     /**
@@ -15,16 +15,16 @@ class MakeTrait extends CustomGeneratorCommand
      *
      * @var string
      */
-    protected $name = 'make:trait';
+    protected $name = 'make:view:composer';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a new trait';
+    protected $description = 'Create a new view composer';
 
-    protected $type = 'Trait';
+    protected $type = 'View composer';
 
     public function handle()
     {
@@ -34,17 +34,15 @@ class MakeTrait extends CustomGeneratorCommand
     protected function getStub()
     {
 
-        return $this->option('boot')
-            ? $this->resolveStubPath('/../stubs/trait-boot.stub')
-            : $this->resolveStubPath('/../stubs/trait.stub');
+        return $this->resolveStubPath('/../stubs/view-composer.stub');
     }
 
     protected function getDefaultNamespace($rootNamespace)
     {
 
-        return (empty(config('laravel-stubs.make.trait.namespace')))
+        return (empty(config('laravel-stubs.make.view:composer.namespace')))
             ? $rootNamespace
-            : config('laravel-stubs.make.trait.namespace');
+            : config('laravel-stubs.make.view:composer.namespace');
     }
 
     protected function getNameInput()
@@ -52,9 +50,9 @@ class MakeTrait extends CustomGeneratorCommand
 
         $name = trim($this->argument('name'));
 
-        $name = Str::endsWith($name, 'Trait')
+        $name = Str::endsWith($name, 'Composer')
             ? $name
-            : $name . 'Trait';
+            : $name . 'Composer';
 
         return $name;
     }
@@ -62,14 +60,7 @@ class MakeTrait extends CustomGeneratorCommand
     protected function getArguments()
     {
         return [
-            ['name', InputArgument::REQUIRED, 'The name of the trait']
-        ];
-    }
-
-    protected function getOptions()
-    {
-        return [
-            ['boot', 'b', InputOption::VALUE_NONE, 'Create a boot trait.'],
+            ['name', InputArgument::REQUIRED, 'The name of the view composer']
         ];
     }
 }

@@ -51,6 +51,12 @@ return [
          */
         'trait' => [
             'namespace' => '\App\Traits'
+        ],
+        /**
+         * make:view:composer
+         */
+        'view:composer' => [
+            'namespace' => '\App\Http\View\Composers'
         ]
     ]
 ];
