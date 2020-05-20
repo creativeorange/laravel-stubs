@@ -45,6 +45,12 @@ return [
             'namespace' => '\App\Interfaces'
         ],
         /**
+         * make:scope
+         */
+        'scope' => [
+            'namespace' => '\App\Scopes'
+        ],
+        /**
          * make:trait
          *
          * Allows you to change the namespace (and so the folder) where the interface will be stored
