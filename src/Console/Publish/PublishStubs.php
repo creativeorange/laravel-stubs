@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Console\Input\InputOption;
 
-class PubishStubs extends Command
+class PublishStubs extends Command
 {
     /**
      * The name and signature of the console command.
