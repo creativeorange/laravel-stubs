@@ -4,6 +4,7 @@ namespace Creativeorange\LaravelStubs\Console\Publish;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\File;
 use Symfony\Component\Console\Input\InputOption;
 
 class PublishStubs extends Command
@@ -40,21 +41,11 @@ class PublishStubs extends Command
     public function handle()
     {
 
-        if (! is_dir($stubsPath = $this->laravel->basePath('stubs'))) {
+        if (!is_dir($stubsPath = $this->laravel->basePath('stubs'))) {
             (new Filesystem)->makeDirectory($stubsPath);
         }
 
-        $files = [
-            __DIR__.'/../../stubs/interface.stub' => $stubsPath.'/interface.stub',
-            __DIR__.'/../../stubs/trait.stub' => $stubsPath.'/trait.stub',
-            __DIR__.'/../../stubs/trait-boot.stub' => $stubsPath.'/trait-boot.stub',
-        ];
-
-        foreach ($files as $from => $to) {
-            if (! file_exists($to) || $this->option('force')) {
-                file_put_contents($to, file_get_contents($from));
-            }
-        }
+        File::copyDirectory(__DIR__.'/../../stubs/', $stubsPath);
 
         return $this->info('Stubs published successfully.');
     }
