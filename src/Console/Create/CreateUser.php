@@ -3,6 +3,7 @@
 namespace Creativeorange\LaravelStubs\Console\Create;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
 
 class CreateUser extends Command
 {
@@ -39,7 +40,6 @@ class CreateUser extends Command
     {
 
         $model = config('laravel-stubs.create.user.model');
-        \var_dump($model);
 
         if (!\class_exists($model)) {
 
@@ -52,6 +52,7 @@ class CreateUser extends Command
             $fields = [$fields];
 
         $saving = [];
+        $passwords = [];
         foreach ($fields as $key => $field) {
 
             if (!\is_array($field)) {
@@ -76,6 +77,13 @@ class CreateUser extends Command
 
                     $saving[$key] = \bcrypt($this->secret($field['name']));
                     break;
+                case 'uuid':
+                    $saving[$key] = Str::uuid();
+                    break;
+                case 'password':
+                    $passwords[$key] = Str::random(8);
+                    $saving[$key] = \bcrypt($passwords[$key]);
+                    break;
                 default:
                     $saving[$key] = $this->ask($field['name']);
             }
@@ -90,6 +98,10 @@ class CreateUser extends Command
         else {
 
             $model::create($saving);
+
+            foreach ($passwords as $key => $password) {
+                $this->info($key . ': ' . $password);
+            }
 
             $this->info('User created successfully');
         }

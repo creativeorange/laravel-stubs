@@ -12,10 +12,13 @@ return [
          * The field key has to correspond with the model field.
          * If the field is defined as an array the following fields are supported:
          *      - name: will be displayed while prompting for the field
-         *      - type: ask|secret
+         *      - type: ask|secret|password|uuid
          *              While the type is ask it's a normal question.
          *              When type is secret the value won't be shown while entering in the command line and will be
          *                  encrypted using bcrypt.
+         *              When type is password it will generate a random 8 character string and display it at the end
+         *                  this can be send to users and will be stored encrypted.
+         *              When type is uuid it will generate a random uuid for the field.
          */
         'user' => [
             'model' => '\App\User',
