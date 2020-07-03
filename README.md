@@ -14,12 +14,22 @@
 - make:interface
 
   Creates a new interface, by default this will be stored in 'App/Interfaces'.
-  An interface will always automatically be prefixed with 'Interface' according to the PSR naming conventions.
+  An interface will always automatically be suffixed with 'Interface' according to the PSR naming conventions.
 
 - make:trait
 
   Creates a new trait, by default this will be stored in 'App/Traits'.
-  An interface will always automatically be prefixed with 'Trait' according to the PSR naming conventions.
+  A trait will always automatically be suffixed with 'Trait' according to the PSR naming conventions.
+
+- make:view:composer
+
+  Creates a new trait, by default this will be stored in 'App/Http/View/Composers'.
+  A view composer will always automatically be suffixed with 'Composer'.
+
+- make:scope
+
+  Creates a new trait, by default this will be stored in 'App/Scopes'.
+  A scope will always automatically be suffixed with 'Scope'.
 
 #### Publish
 - publish:stubs

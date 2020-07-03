@@ -10,8 +10,6 @@ class DummyClass implements Scope
 {
 
     /**
-     * Sort the orders in the database descending
-     *
      * @param Builder $builder
      * @param Model $model
      */
