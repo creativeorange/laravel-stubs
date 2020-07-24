@@ -21,7 +21,8 @@ trait DummyClass
 
         static::creating(function ($model) {
 
-            $model->$uuidField = Str::uuid();
+            $field = self::$uuidField;
+            $model->$field = Str::uuid();
         });
     }
 }
