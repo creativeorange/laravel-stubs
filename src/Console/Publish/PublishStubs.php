@@ -23,6 +23,9 @@ class PublishStubs extends Command
      */
     protected $description = 'Publish the stubs of this package';
 
+    protected $signature = 'publish:stubs
+                                {--f|force : Overwrite any existing files}';
+
     /**
      * Create a new command instance.
      *
@@ -47,7 +50,7 @@ class PublishStubs extends Command
 
         File::copyDirectory(__DIR__.'/../../stubs/', $stubsPath);
 
-        return $this->info('Stubs published successfully.');
+        return $this->info('Stubs published successfully');
     }
 
     protected function getOptions()

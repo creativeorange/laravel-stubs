@@ -24,6 +24,12 @@ class MakeTrait extends CustomGeneratorCommand
      */
     protected $description = 'Create a new trait';
 
+    protected $signature = 'make:trait
+                                {name : The name of the trait}
+                                {--b|boot : Create a boot trait}
+                                {--a|anonymous : Create a trait to anonymous data}
+                                {--u|uuid : Create a trait to generate an uuid field}';
+
     protected $type = 'Trait';
 
     public function handle()
@@ -34,9 +40,19 @@ class MakeTrait extends CustomGeneratorCommand
     protected function getStub()
     {
 
-        return $this->option('boot')
-            ? $this->resolveStubPath('/../stubs/trait-boot.stub')
-            : $this->resolveStubPath('/../stubs/trait.stub');
+        if ($this->option('boot')) {
+            return $this->resolveStubPath('/../stubs/trait-boot.stub');
+        }
+
+        if ($this->option('anonymous')) {
+            return $this->resolveStubPath('/../stubs/trait-anonymous.stub');
+        }
+
+        if ($this->option('uuid')) {
+            return $this->resolveStubPath('/../stubs/trait-uuid.stub');
+        }
+
+        return $this->resolveStubPath('/../stubs/trait.stub');
     }
 
     protected function getDefaultNamespace($rootNamespace)
@@ -69,7 +85,9 @@ class MakeTrait extends CustomGeneratorCommand
     protected function getOptions()
     {
         return [
-            ['boot', 'b', InputOption::VALUE_NONE, 'Create a boot trait.'],
+            ['boot', 'b', InputOption::VALUE_NONE, 'Create a boot trait'],
+            ['anonymous', 'a', InputOption::VALUE_NONE, 'Create a trait to anonymous data'],
+            ['uuid', 'u', InputOption::VALUE_NONE, 'Create a trait to generate an uuid field'],
         ];
     }
 }

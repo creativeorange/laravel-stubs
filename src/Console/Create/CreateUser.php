@@ -12,7 +12,7 @@ class CreateUser extends Command
      *
      * @var string
      */
-    protected $signature = 'create:user';
+    protected $name = 'create:user';
 
     /**
      * The console command description.
@@ -20,6 +20,8 @@ class CreateUser extends Command
      * @var string
      */
     protected $description = 'Create an user';
+
+    protected $signature = 'create:user';
 
     /**
      * Create a new command instance.
@@ -43,7 +45,7 @@ class CreateUser extends Command
 
         if (!\class_exists($model)) {
 
-            return $this->error('Model does not exist.');
+            return $this->error('Model does not exist');
         }
 
         $fields = config('laravel-stubs.create.user.fields');
@@ -93,7 +95,7 @@ class CreateUser extends Command
             $model::where(config('laravel-stubs.create.user.unique'),
                             $saving[config('laravel-stubs.create.user.unique')])->first()) {
 
-            $this->error('This user already exists.');
+            $this->error('This user already exists');
         }
         else {
 

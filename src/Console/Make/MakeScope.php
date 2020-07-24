@@ -24,6 +24,9 @@ class MakeScope extends CustomGeneratorCommand
      */
     protected $description = 'Create a new scope';
 
+    protected $signature = 'make:scope
+                                {name : The name of the scope}';
+
     protected $type = 'Scope';
 
     public function handle()

@@ -23,6 +23,9 @@ class MakeInterface extends CustomGeneratorCommand
      */
     protected $description = 'Create a new interface';
 
+    protected $signature = 'make:interface
+                                {name : The name of the interface}';
+
     protected $type = 'Interface';
 
     public function handle()

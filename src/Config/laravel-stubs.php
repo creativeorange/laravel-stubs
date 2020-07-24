@@ -49,6 +49,8 @@ return [
         ],
         /**
          * make:scope
+         *
+         * Allows you to change the namespace (and so the folder) where the scope will be stored
          */
         'scope' => [
             'namespace' => '\App\Scopes'
@@ -63,9 +65,17 @@ return [
         ],
         /**
          * make:view:composer
+         *
+         * Allows you to change the namespace (and so the folder) where the view composer will be stored
          */
         'view:composer' => [
             'namespace' => '\App\Http\View\Composers'
+        ],
+        /**
+         * make:view:composer
+         */
+        'facade' => [
+            'namespace' => '\App\Facades'
         ]
     ]
 ];

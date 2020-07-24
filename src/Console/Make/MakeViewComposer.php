@@ -24,6 +24,9 @@ class MakeViewComposer extends CustomGeneratorCommand
      */
     protected $description = 'Create a new view composer';
 
+    protected $signature = 'make:view:composer
+                                {name : The name of the view composer}';
+
     protected $type = 'View composer';
 
     public function handle()
