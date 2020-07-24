@@ -48,7 +48,15 @@ class PublishStubs extends Command
             (new Filesystem)->makeDirectory($stubsPath);
         }
 
-        File::copyDirectory(__DIR__.'/../../stubs/', $stubsPath);
+        $files = File::allFiles(__DIR__.'/../../stubs/');
+
+        foreach ($files as $file) {
+            $to = $stubsPath . '/' . $file->getFilename();
+            $from = $file->getPathName();
+            if (! file_exists($to) || $this->option('force')) {
+                file_put_contents($to, file_get_contents($from));
+            }
+        }
 
         return $this->info('Stubs published successfully');
     }
