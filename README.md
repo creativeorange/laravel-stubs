@@ -83,6 +83,8 @@ or add the following to your composer.json file and run `composer update`.
   Supports the patching of the following things:
   - Language tags
     - Replaces a language tag with another language tag for all languages.
+  - Htaccess
+    - Adds security things to the default htaccess. See the config for the options.
   
 #### Publish
 - ##### publish:config

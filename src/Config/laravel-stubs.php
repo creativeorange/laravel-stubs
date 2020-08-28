@@ -96,6 +96,44 @@ return [
          */
         'language_tags' => [
             'passwords.user'
+        ],
+        'htaccess' => [
+            'headers' => [
+                'needsModule' => false,
+                'values' => [
+                    'Header always set X-Frame-Options SAMEORIGIN',
+                    'Header always set X-XSS-Protection 1;mode=block',
+                    'Header always set X-Content-Type-Options nosniff',
+                    'Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" env=HTTPS',
+                ]
+            ],
+            'mod_expires.c' => [
+                'needsModule' => true,
+                'values' => [
+                    'ExpiresActive on',
+                    'AddType application/font-sfnt            otf ttf',
+                    'AddType application/font-woff            woff',
+                    'AddType application/font-woff2           woff2',
+                    'AddType application/vnd.ms-fontobject    eot',
+                    'ExpiresDefault "access plus 2 days"',
+                    'ExpiresByType image/jpg "access plus 2 months"',
+                    'ExpiresByType image/svg+xml "access 2 months"',
+                    'ExpiresByType image/gif "access plus 2 months"',
+                    'ExpiresByType image/jpeg "access plus 2 months"',
+                    'ExpiresByType image/png "access plus 2 months"',
+                    'ExpiresByType text/css "access plus 2 months"',
+                    'ExpiresByType text/javascript "access plus 2 months"',
+                    'ExpiresByType application/javascript "access plus 2 months"',
+                    'ExpiresByType application/x-shockwave-flash "access plus 2 months"',
+                    'ExpiresByType image/ico "access plus 2 months"',
+                    'ExpiresByType image/x-icon "access plus 2 months"',
+                    'ExpiresByType text/html "access plus 600 seconds"',
+                    'ExpiresByType application/font-woff "access plus 2 months"',
+                    'ExpiresByType application/font-woff2 "access plus 2 months"',
+                    'ExpiresByType application/font-sfnt "access plus 2 months"',
+                    'ExpiresByType application/vnd.ms-fontobject "access plus 2 months"',
+                ]
+            ]
         ]
     ]
 ];
