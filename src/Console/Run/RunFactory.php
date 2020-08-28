@@ -28,8 +28,6 @@ class RunFactory extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
     public function handle()
     {
@@ -37,7 +35,8 @@ class RunFactory extends Command
             $model = $this->getModelOption();
         }
         catch (\Exception $e) {
-            return $this->error($e->getMessage());
+            $this->error($e->getMessage());
+            return;
         }
 
         $amount = $this->getAmountOption();
@@ -46,10 +45,11 @@ class RunFactory extends Command
             factory($model, $amount)->create();
         }
         catch (\InvalidArgumentException $e) {
-            return $this->error('Factory does not exist, ' . $e->getMessage());
+            $this->error('Factory does not exist, ' . $e->getMessage());
+            return;
         }
 
-        return $this->info('Successfully ran factory');
+        $this->info('Successfully ran factory');
     }
 
     protected function getModelOption()

@@ -23,17 +23,13 @@ class CreateUser extends Command
 
     protected $signature = 'create:user';
 
-    /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
     public function handle()
     {
         $model = config('laravel-stubs.create.user.model');
 
         if (!\class_exists($model)) {
-            return $this->error('Model does not exist');
+            $this->error('Model does not exist');
+            return;
         }
 
         $fields = config('laravel-stubs.create.user.fields');

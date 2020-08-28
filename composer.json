@@ -25,5 +25,13 @@
                 "Creativeorange\\LaravelStubs\\LaravelStubsServiceProvider"
             ]
         }
+    },
+    "require-dev": {
+        "php": ">=7.2",
+        "orchestra/testbench": "^5.4",
+        "nunomaduro/larastan": "^0.6.2"
+    },
+    "scripts": {
+        "analyze": "phpstan analyse -c vendor/nunomaduro/larastan/extension.neon -l 5 src/"
     }
 }

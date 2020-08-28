@@ -27,8 +27,6 @@ class DispatchJob extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
     public function handle()
     {
@@ -36,7 +34,8 @@ class DispatchJob extends Command
         $class = \str_replace('/', '\\', $class);
 
         if (!\class_exists($class)) {
-            return $this->error('Job does not exist');
+            $this->error('Job does not exist');
+            return;
         }
 
         dispatch(new $class(...$this->argument('arguments')));
