@@ -32,7 +32,7 @@ class Patch extends Command
      */
     public function handle()
     {
-//        $this->handleLanguagePatching();
+        $this->handleLanguagePatching();
         $this->handleHtaccessPatching();
 
         $this->info('Successfully patched Laravel :)');
