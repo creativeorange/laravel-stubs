@@ -28,20 +28,13 @@ class MakeInterface extends CustomGeneratorCommand
 
     protected $type = 'Interface';
 
-    public function handle()
-    {
-        parent::handle();
-    }
-
     protected function getStub()
     {
-
         return $this->resolveStubPath('/../stubs/interface.stub');
     }
 
     protected function getDefaultNamespace($rootNamespace)
     {
-
         return (empty(config('laravel-stubs.make.interface.namespace')))
             ? $rootNamespace
             : config('laravel-stubs.make.interface.namespace');
@@ -49,7 +42,6 @@ class MakeInterface extends CustomGeneratorCommand
 
     protected function getNameInput()
     {
-
         $name = trim($this->argument('name'));
 
         $name = Str::endsWith($name, 'Interface')

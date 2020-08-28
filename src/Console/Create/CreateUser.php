@@ -24,27 +24,15 @@ class CreateUser extends Command
     protected $signature = 'create:user';
 
     /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Execute the console command.
      *
      * @return mixed
      */
     public function handle()
     {
-
         $model = config('laravel-stubs.create.user.model');
 
         if (!\class_exists($model)) {
-
             return $this->error('Model does not exist');
         }
 
@@ -56,9 +44,7 @@ class CreateUser extends Command
         $saving = [];
         $passwords = [];
         foreach ($fields as $key => $field) {
-
             if (!\is_array($field)) {
-
                 $key = $field;
                 $field = [
                     'name' => \ucfirst($field),
@@ -98,7 +84,6 @@ class CreateUser extends Command
             $this->error('This user already exists');
         }
         else {
-
             $model::create($saving);
 
             foreach ($passwords as $key => $password) {

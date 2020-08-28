@@ -8,19 +8,24 @@ use Illuminate\Support\ServiceProvider;
 class LaravelStubsServiceProvider extends ServiceProvider
 {
 
-    public function boot() {
-
+    public function boot()
+    {
         if ($this->app->runningInConsole()) {
             $this->commands([
                 /** Create */
                 Console\Create\CreateUser::class,
+                /** Dispatch */
+                Console\Dispatch\DispatchJob::class,
                 /** Make */
                 Console\Make\MakeTrait::class,
                 Console\Make\MakeScope::class,
                 Console\Make\MakeInterface::class,
                 Console\Make\MakeViewComposer::class,
                 Console\Make\MakeFacade::class,
+                /** Patch */
+                Console\Patch::class,
                 /** Publish */
+                Console\Publish\PublishConfig::class,
                 Console\Publish\PublishStubs::class,
                 /** Run */
                 Console\Run\RunFactory::class,
@@ -32,9 +37,8 @@ class LaravelStubsServiceProvider extends ServiceProvider
         ], 'config');
     }
 
-    public function register() {
-
-
+    public function register()
+    {
         $this->mergeConfigFrom(__DIR__ . '/Config/laravel-stubs.php', 'laravel-stubs');
     }
 }

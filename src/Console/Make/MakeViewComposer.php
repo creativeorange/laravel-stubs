@@ -5,7 +5,6 @@ namespace Creativeorange\LaravelStubs\Console\Make;
 use Creativeorange\LaravelStubs\Console\CustomGeneratorCommand;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
 
 class MakeViewComposer extends CustomGeneratorCommand
 {
@@ -29,20 +28,13 @@ class MakeViewComposer extends CustomGeneratorCommand
 
     protected $type = 'View composer';
 
-    public function handle()
-    {
-        parent::handle();
-    }
-
     protected function getStub()
     {
-
         return $this->resolveStubPath('/../stubs/view-composer.stub');
     }
 
     protected function getDefaultNamespace($rootNamespace)
     {
-
         return (empty(config('laravel-stubs.make.view:composer.namespace')))
             ? $rootNamespace
             : config('laravel-stubs.make.view:composer.namespace');
@@ -50,7 +42,6 @@ class MakeViewComposer extends CustomGeneratorCommand
 
     protected function getNameInput()
     {
-
         $name = trim($this->argument('name'));
 
         $name = Str::endsWith($name, 'Composer')

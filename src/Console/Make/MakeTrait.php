@@ -32,14 +32,8 @@ class MakeTrait extends CustomGeneratorCommand
 
     protected $type = 'Trait';
 
-    public function handle()
-    {
-        parent::handle();
-    }
-
     protected function getStub()
     {
-
         if ($this->option('boot')) {
             return $this->resolveStubPath('/../stubs/trait-boot.stub');
         }
@@ -57,7 +51,6 @@ class MakeTrait extends CustomGeneratorCommand
 
     protected function getDefaultNamespace($rootNamespace)
     {
-
         return (empty(config('laravel-stubs.make.trait.namespace')))
             ? $rootNamespace
             : config('laravel-stubs.make.trait.namespace');
@@ -65,7 +58,6 @@ class MakeTrait extends CustomGeneratorCommand
 
     protected function getNameInput()
     {
-
         $name = trim($this->argument('name'));
 
         $name = Str::endsWith($name, 'Trait')

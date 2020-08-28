@@ -40,6 +40,14 @@ return [
      */
     'make' => [
         /**
+         * make:facade
+         *
+         * Allows you to change the namespace (and so the folder) where the facade will be stored
+         */
+        'facade' => [
+            'namespace' => '\App\Facades'
+        ],
+        /**
          * make:interface
          *
          * Allows you to change the namespace (and so the folder) where the interface will be stored
@@ -71,11 +79,23 @@ return [
         'view:composer' => [
             'namespace' => '\App\Http\View\Composers'
         ],
+    ],
+
+    /**
+     * Configuration for the patch command.
+     */
+    'patch' => [
         /**
-         * make:view:composer
+         * The folder that contains your language folders
+         * This is the base folder, while patching language tags it will loop over all folders inside this folder to find the needed languages
          */
-        'facade' => [
-            'namespace' => '\App\Facades'
+        'language_folder' => base_path('resources/lang'),
+        /**
+         * The tags that need to be replaced with other tags.
+         * If not provided as key => value it will prompt for a value.
+         */
+        'language_tags' => [
+            'passwords.user'
         ]
     ]
 ];

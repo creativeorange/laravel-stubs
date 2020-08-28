@@ -5,7 +5,6 @@ namespace Creativeorange\LaravelStubs\Console\Make;
 use Creativeorange\LaravelStubs\Console\CustomGeneratorCommand;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
 
 class MakeFacade extends CustomGeneratorCommand
 {
@@ -30,14 +29,8 @@ class MakeFacade extends CustomGeneratorCommand
 
     protected $type = 'Facade';
 
-    public function handle()
-    {
-        parent::handle();
-    }
-
     protected function getStub()
     {
-
         return $this->resolveStubPath('/../stubs/facade.stub');
     }
 
@@ -50,7 +43,6 @@ class MakeFacade extends CustomGeneratorCommand
 
     protected function parseAccessor(&$stub)
     {
-
         $accessor = $this->argument('accessor');
         $accessor = Str::endsWith($accessor, '/')
             ? $accessor
@@ -63,7 +55,6 @@ class MakeFacade extends CustomGeneratorCommand
 
     protected function getDefaultNamespace($rootNamespace)
     {
-
         return (empty(config('laravel-stubs.make.facade.namespace')))
             ? $rootNamespace
             : config('laravel-stubs.make.facade.namespace');
@@ -71,7 +62,6 @@ class MakeFacade extends CustomGeneratorCommand
 
     protected function getNameInput()
     {
-
         $name = trim($this->argument('name'));
 
         $name = Str::endsWith($name, 'Facade')

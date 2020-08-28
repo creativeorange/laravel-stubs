@@ -5,7 +5,6 @@ namespace Creativeorange\LaravelStubs\Console\Make;
 use Creativeorange\LaravelStubs\Console\CustomGeneratorCommand;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
 
 class MakeScope extends CustomGeneratorCommand
 {
@@ -29,20 +28,13 @@ class MakeScope extends CustomGeneratorCommand
 
     protected $type = 'Scope';
 
-    public function handle()
-    {
-        parent::handle();
-    }
-
     protected function getStub()
     {
-
         return $this->resolveStubPath('/../stubs/scope.stub');
     }
 
     protected function getDefaultNamespace($rootNamespace)
     {
-
         return (empty(config('laravel-stubs.make.scope.namespace')))
             ? $rootNamespace
             : config('laravel-stubs.make.scope.namespace');
@@ -50,7 +42,6 @@ class MakeScope extends CustomGeneratorCommand
 
     protected function getNameInput()
     {
-
         $name = trim($this->argument('name'));
 
         $name = Str::endsWith($name, 'Scope')

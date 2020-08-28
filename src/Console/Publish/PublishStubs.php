@@ -27,23 +27,12 @@ class PublishStubs extends Command
                                 {--f|force : Overwrite any existing files}';
 
     /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Execute the console command.
      *
      * @return mixed
      */
     public function handle()
     {
-
         if (!is_dir($stubsPath = $this->laravel->basePath('stubs'))) {
             (new Filesystem)->makeDirectory($stubsPath);
         }
@@ -53,12 +42,12 @@ class PublishStubs extends Command
         foreach ($files as $file) {
             $to = $stubsPath . '/' . $file->getFilename();
             $from = $file->getPathName();
-            if (! file_exists($to) || $this->option('force')) {
+            if (!file_exists($to) || $this->option('force')) {
                 file_put_contents($to, file_get_contents($from));
             }
         }
 
-        return $this->info('Stubs published successfully');
+        $this->info('Stubs published successfully');
     }
 
     protected function getOptions()
