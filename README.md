@@ -1,4 +1,4 @@
-# laravel-stubs
+# Laravel-stubs
 
 Laravel stubs aims to add some "missing" functionality to the artisan commands that currently exist.
 
