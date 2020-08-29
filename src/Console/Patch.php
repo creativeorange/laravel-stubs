@@ -7,6 +7,7 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
 class Patch extends Command
@@ -26,6 +27,7 @@ class Patch extends Command
     protected $description = 'Patch laravel';
 
     protected $signature = 'patch
+                                {sections?* : Only run specific sections of the patch}
                                 {--f|force : Overwrite any existing files}';
 
     /**
@@ -39,14 +41,32 @@ class Patch extends Command
             Before doing so please check your config and read the documentation on patching.');
 
         if ($start) {
-            $this->handleLanguagePatching();
-            $this->handleConfigPatching();
-            $this->handleCookiePatching();
-            $this->handleHtaccessPatching();
+            if ($this->shouldRun('language')) {
+                $this->handleLanguagePatching();
+            }
+            if ($this->shouldRun('config')) {
+                $this->handleConfigPatching();
+            }
+            if ($this->shouldRun('cookie')) {
+                $this->handleCookiePatching();
+            }
+            if ($this->shouldRun('htaccess')) {
+                $this->handleHtaccessPatching();
+            }
 
             $this->info('Successfully patched Laravel :)');
             $this->info('Please make sure to always validate the patches done.');
         }
+    }
+
+    private function shouldRun($name)
+    {
+        if (empty($this->argument('sections')) ||
+            \in_array($name, $this->argument('sections'))) {
+            return true;
+        }
+
+        return false;
     }
 
     private function handleLanguagePatching()
@@ -220,6 +240,13 @@ class Patch extends Command
         } else {
             $this->warn("The ".$name." already exists.");
         }
+    }
+
+    protected function getArguments()
+    {
+        return [
+            ['sections', InputArgument::IS_ARRAY, 'Only run specific sections of the patch'],
+        ];
     }
 
     protected function getOptions()

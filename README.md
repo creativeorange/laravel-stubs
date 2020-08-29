@@ -81,14 +81,20 @@ or add the following to your composer.json file and run `composer update`.
     
   Patch some basic things you might not like about laravel.
   Supports the patching of the following things:
-  - Language tags
+  - Language
     - Replaces a language tag with another language tag for all languages.
   - Htaccess
     - Adds security things to the default htaccess. See the config for the options.
-  - Cookies
+  - Cookie
     - Adds a prefix to the cookies.
   - Config
     - Replace config values.
+  ##### Arguments
+    - Sections - An array of sections to patch. The allowed sections are:
+      - language
+      - htaccess
+      - cookie
+      - config
   
 #### Publish
 - ##### publish:config
