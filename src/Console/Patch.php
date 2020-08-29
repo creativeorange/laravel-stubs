@@ -143,7 +143,7 @@ class Patch extends Command
         \file_put_contents($appConfigPath, $fileContents);
 
         $middlewarePath = \config('laravel-stubs.patch.middleware_folder').'/VerifyCsrfToken.php';
-        $middleware = \file_get_contents(__DIR__.'/../stubs/cookies/middleware.stub');
+        $middleware = \file_get_contents(__DIR__.'/../stubs/cookies/cookiemiddleware.stub');
         $fileContents = \file_get_contents($middlewarePath);
         if (!Str::contains($fileContents, $middleware)) {
             $use = "use Illuminate\Cookie\CookieValuePrefix;

@@ -9,6 +9,12 @@ use Symfony\Component\Console\Input\InputOption;
 
 class PublishStubs extends Command
 {
+    protected $exclude = [
+        'cookie.stub',
+        'cookiejar.stub',
+        'cookieserviceprovider.stub',
+        'cookiemiddleware.stub'
+    ];
     /**
      * The name and signature of the console command.
      *
@@ -40,7 +46,8 @@ class PublishStubs extends Command
         foreach ($files as $file) {
             $to = $stubsPath . '/' . $file->getFilename();
             $from = $file->getPathName();
-            if (!file_exists($to) || $this->option('force')) {
+            if ((!file_exists($to) || $this->option('force')) &&
+                !\in_array($file->getFilename(), $this->exclude)) {
                 file_put_contents($to, file_get_contents($from));
             }
         }
