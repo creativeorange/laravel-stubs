@@ -95,7 +95,7 @@ return [
          * If not provided as key => value it will prompt for a value.
          */
         'language_tags' => [
-            'passwords.user' => 'passwords.sent'
+            'passwords.user'
         ],
         'config_folder' => base_path('config'),
         'config_options' => [
