@@ -143,18 +143,29 @@ class Patch extends Command
         \file_put_contents($appConfigPath, $fileContents);
 
         $middlewarePath = \config('laravel-stubs.patch.middleware_folder').'/VerifyCsrfToken.php';
-        $middleware = \file_get_contents(__DIR__.'/../stubs/cookies/cookiemiddleware.stub');
+        $middlewareSerialized = \file_get_contents(__DIR__.'/../stubs/cookies/cookiemiddleware_serialized.stub');
+        $middlewareAddCookieToResponse = \file_get_contents(__DIR__.'/../stubs/cookies/cookiemiddleware_addCookieToResponse.stub');
+        $middlewareGetTokenFromRequest = \file_get_contents(__DIR__.'/../stubs/cookies/cookiemiddleware_getTokenFromRequest.stub');
+        $use = \file_get_contents(__DIR__.'/../stubs/cookies/cookiemiddleware_use.stub');
+
         $fileContents = \file_get_contents($middlewarePath);
-        if (!Str::contains($fileContents, $middleware)) {
-            $use = "use Illuminate\Cookie\CookieValuePrefix;
-            use Symfony\Component\HttpFoundation\Cookie;
-            use Illuminate\Contracts\Support\Responsable;";
+        if (!Str::contains($fileContents, $use)) {
             $fileContents = preg_replace('/(use .+;)([\s]+class)/', "$1\n".\preg_replace("/[ |\t]{2,}/", "", $use)."$2",
                 $fileContents);
-            $fileContents = preg_replace('/(})/', "\n".$middleware."\n$1",
-                $fileContents);
-            \file_put_contents($middlewarePath, $fileContents);
         }
+        if (!Str::contains($fileContents, 'protected function getTokenFromRequest')) {
+            $fileContents = preg_replace('/(class .*[\s\S]{[.|\s|\S]*)(})/', "$1\n".$middlewareGetTokenFromRequest."\n$2",
+                $fileContents);
+        }
+        if (!Str::contains($fileContents, 'protected function addCookieToResponse')) {
+            $fileContents = preg_replace('/(class .*[\s\S]{[.|\s|\S]*)(})/', "$1\n".$middlewareAddCookieToResponse."\n$2",
+                $fileContents);
+        }
+        if (!Str::contains($fileContents, 'public static function serialized')) {
+            $fileContents = preg_replace('/(class .*[\s\S]{[.|\s|\S]*)(})/', "$1\n".$middlewareSerialized."\n$2",
+                $fileContents);
+        }
+        \file_put_contents($middlewarePath, $fileContents);
 
         $this->warn('Make sure to change the env values for local cookies or add a TLS certificate.');
         $this->info('Cookie patching done.');

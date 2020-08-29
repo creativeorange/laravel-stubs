@@ -1,0 +1,9 @@
+    /**
+     * Determine if the cookie contents should be serialized.
+     *
+     * @return bool
+     */
+    public static function serialized()
+    {
+        return EncryptCookies::serialized(config('session.cookie_prefix').'XSRF-TOKEN');
+    }
