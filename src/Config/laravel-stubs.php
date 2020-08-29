@@ -95,16 +95,41 @@ return [
          * If not provided as key => value it will prompt for a value.
          */
         'language_tags' => [
-            'passwords.user'
+            'passwords.user' => 'passwords.sent'
         ],
+        'config_folder' => base_path('config'),
+        'config_options' => [
+            'session.secure' => "env('SESSION_SECURE_COOKIE', true)",
+        ],
+        'middleware_folder' => base_path('app/Http/Middleware'),
+        'cookies' => [
+            'namespace' => '\App\Foundation\Cookie'
+        ],
+        'public_folder' => \base_path('public'),
         'htaccess' => [
-            'headers' => [
-                'needsModule' => false,
+            'mod_headers.c' => [
+                'needsModule' => true,
                 'values' => [
                     'Header always set X-Frame-Options SAMEORIGIN',
                     'Header always set X-XSS-Protection 1;mode=block',
                     'Header always set X-Content-Type-Options nosniff',
                     'Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" env=HTTPS',
+                    'Header always set Referrer-Policy "no-referrer-when-downgrade"',
+                    'Header always set Content-Security-Policy: "default-src \'self\'; \
+                        script-src \'self\'; \
+                        object-src \'self\'; \
+                        style-src \'self\'; \
+                        img-src \'self\'; \
+                        media-src \'self\'; \
+                        frame-src \'self\'; \
+                        font-src \'self\'; \
+                        connect-src \'self\'; \
+                        form-action \'self\'; \
+                        sandbox \'self\'; \
+                        script-nonce \'self\'; \
+                        reflected-xss \'self\'; \
+                        plugin-types \'self\'; \
+                        report-uri \'self\'"',
                 ]
             ],
             'mod_expires.c' => [

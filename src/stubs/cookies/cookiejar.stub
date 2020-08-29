@@ -1,0 +1,27 @@
+<?php
+
+namespace DummyNamespace;
+
+use Illuminate\Cookie\CookieJar as CookieJarStock;
+
+class CookieJar extends CookieJarStock
+{
+    public function make(
+        $name,
+        $value,
+        $minutes = 0,
+        $path = null,
+        $domain = null,
+        $secure = null,
+        $httpOnly = true,
+        $raw = false,
+        $sameSite = null
+    ) {
+        if (!empty($name)) {
+            $name = config('session.cookie_prefix') . $name;
+        }
+
+        return parent::make($name, $value, $minutes, $path, $domain, $secure, $httpOnly, $raw,
+            $sameSite);
+    }
+}

@@ -1,0 +1,18 @@
+<?php
+
+namespace DummyNamespace;
+
+use Illuminate\Support\Facades\Cookie as CookieStock;
+
+class Cookie extends CookieStock
+{
+    public static function has($key)
+    {
+        return !is_null(static::$app['request']->cookie(config('session.cookie_prefix').$key, null));
+    }
+
+    public static function get($key = null, $default = null)
+    {
+        return static::$app['request']->cookie(config('session.cookie_prefix').$key, $default);
+    }
+}

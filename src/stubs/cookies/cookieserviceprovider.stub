@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Providers;
+
+use Illuminate\Cookie\CookieServiceProvider as CookieServiceProviderStock;
+
+class CookieServiceProvider extends CookieServiceProviderStock
+{
+    public function register()
+    {
+        $this->app->singleton('cookie', function ($app) {
+            $config = $app->make('config')->get('session');
+
+            $jar = config('laravel-stubs.patch.cookies.namespace') .'\CookieJar';
+            return (new $jar())->setDefaultPathAndDomain(
+                $config['path'], $config['domain'], $config['secure'], $config['same_site'] ?? null
+            );
+        });
+    }
+}

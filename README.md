@@ -85,6 +85,10 @@ or add the following to your composer.json file and run `composer update`.
     - Replaces a language tag with another language tag for all languages.
   - Htaccess
     - Adds security things to the default htaccess. See the config for the options.
+  - Cookies
+    - Adds a prefix to the cookies.
+  - Config
+    - Replace config values.
   
 #### Publish
 - ##### publish:config
