@@ -2,6 +2,10 @@
 
 Laravel stubs aims to add some "missing" functionality to the artisan commands that currently exist.
 
+[![Latest Stable Version](https://poser.pugx.org/creativeorange/laravel-stubs/v)](//packagist.org/packages/creativeorange/laravel-stubs)
+[![Total Downloads](https://poser.pugx.org/creativeorange/laravel-stubs/downloads)](//packagist.org/packages/creativeorange/laravel-stubs)
+[![License](https://poser.pugx.org/creativeorange/laravel-stubs/license)](//packagist.org/packages/creativeorange/laravel-stubs)
+
 ## Installation
 
 First, pull in the package through Composer via the command line:
@@ -10,7 +14,6 @@ composer require creativeorange/gravatar ~1.0
 ```
 
 or add the following to your composer.json file and run `composer update`.
-
 ```
 "require": {
     "creativeorange/gravatar": "~1.0"
