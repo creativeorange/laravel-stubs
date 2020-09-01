@@ -23,7 +23,7 @@ return [
          *              When type is uuid it will generate a random uuid for the field.
          */
         'user' => [
-            'model' => '\App\User',
+            'model' => '\App\Models\User',
             'unique' => 'email',
             'fields' => [
                 'name',

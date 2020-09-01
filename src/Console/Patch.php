@@ -150,16 +150,11 @@ class Patch extends Command
         $middlewarePath = \config('laravel-stubs.patch.middleware_folder').'/VerifyCsrfToken.php';
         $middlewareSerialized = \file_get_contents(__DIR__.'/../stubs/cookies/cookiemiddleware_serialized.stub');
         $middlewareAddCookieToResponse = \file_get_contents(__DIR__.'/../stubs/cookies/cookiemiddleware_addCookieToResponse.stub');
-        $middlewareGetTokenFromRequest = \file_get_contents(__DIR__.'/../stubs/cookies/cookiemiddleware_getTokenFromRequest.stub');
         $use = \file_get_contents(__DIR__.'/../stubs/cookies/cookiemiddleware_use.stub');
 
         $fileContents = \file_get_contents($middlewarePath);
         if (!Str::contains($fileContents, $use)) {
             $fileContents = preg_replace('/(use .+;)([\s]+class)/', "$1\n".\preg_replace("/[ |\t]{2,}/", "", $use)."$2",
-                $fileContents);
-        }
-        if (!Str::contains($fileContents, 'protected function getTokenFromRequest')) {
-            $fileContents = preg_replace('/(class .*[\s\S]{[.|\s|\S]*)(})/', "$1\n".$middlewareGetTokenFromRequest."\n$2",
                 $fileContents);
         }
         if (!Str::contains($fileContents, 'protected function addCookieToResponse')) {
