@@ -92,6 +92,11 @@ class Patch extends Command
             $explodedLanguageTag = explode('.', $tag);
 
             foreach (File::directories(config('laravel-stubs.patch.language_folder')) as $languagePath) {
+                $explodedLanguagePath = $languagePath;
+                if (in_array(\array_pop($explodedLanguagePath), \config('laravel-stubs.patch.language_exclude'))) {
+                    continue;
+                }
+
                 $file = \array_shift($explodedLanguageTag);
 
                 $fileContents = \file_get_contents($languagePath.'/'.$file.'.php');

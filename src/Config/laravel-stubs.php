@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Str;
+
 return [
 
     /**
@@ -97,9 +99,13 @@ return [
         'language_tags' => [
             'passwords.user'
         ],
+        'language_exclude' => [
+            'vendor'
+        ],
         'config_folder' => base_path('config'),
         'config_options' => [
             'session.secure' => "env('SESSION_SECURE_COOKIE', true)",
+            'session.cookie' => "env('SESSION_COOKIE', ENV('SESSION_COOKIE_PREFIX', '__Secure-') . Str::slug(env('APP_NAME', 'laravel'), '_').'_session')"
         ],
         'middleware_folder' => base_path('app/Http/Middleware'),
         'cookies' => [
