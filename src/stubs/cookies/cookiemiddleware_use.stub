@@ -1,3 +1,2 @@
-use Illuminate\Cookie\CookieValuePrefix;
 use Symfony\Component\HttpFoundation\Cookie;
 use Illuminate\Contracts\Support\Responsable;

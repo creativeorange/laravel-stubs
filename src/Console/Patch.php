@@ -28,6 +28,7 @@ class Patch extends Command
 
     protected $signature = 'patch
                                 {sections?* : Only run specific sections of the patch}
+                                {--no-xsrf : Prevents the patching of the xsrf cookie}
                                 {--f|force : Overwrite any existing files}';
 
     /**
@@ -141,31 +142,50 @@ class Patch extends Command
 
         $appConfigPath = \config('laravel-stubs.patch.config_folder').'/app.php';
         $fileContents = \file_get_contents($appConfigPath);
-        $fileContents = \str_replace('Illuminate\Cookie\CookieServiceProvider::class',
-            'App\Providers\CookieServiceProvider::class', $fileContents);
-        $fileContents = \str_replace('Illuminate\Support\Facades\Cookie::class', 'App\Facades\Cookie::class',
-            $fileContents);
+        $fileContents = \str_replace(
+            'Illuminate\Cookie\CookieServiceProvider::class',
+            'App\Providers\CookieServiceProvider::class',
+            $fileContents
+        );
+        $fileContents = \str_replace(
+            'Illuminate\Support\Facades\Cookie::class',
+            'App\Facades\Cookie::class',
+            $fileContents
+        );
         \file_put_contents($appConfigPath, $fileContents);
 
-        $middlewarePath = \config('laravel-stubs.patch.middleware_folder').'/VerifyCsrfToken.php';
-        $middlewareSerialized = \file_get_contents(__DIR__.'/../stubs/cookies/cookiemiddleware_serialized.stub');
-        $middlewareAddCookieToResponse = \file_get_contents(__DIR__.'/../stubs/cookies/cookiemiddleware_addCookieToResponse.stub');
-        $use = \file_get_contents(__DIR__.'/../stubs/cookies/cookiemiddleware_use.stub');
+        if (!$this->option('no-xsrf')) {
+            $middlewarePath = \config('laravel-stubs.patch.middleware_folder').'/VerifyCsrfToken.php';
+            $middlewareSerialized = \file_get_contents(__DIR__.'/../stubs/cookies/cookiemiddleware_serialized.stub');
+            $middlewareAddCookieToResponse = \file_get_contents(
+                __DIR__.'/../stubs/cookies/cookiemiddleware_addCookieToResponse.stub'
+            );
+            $use = \file_get_contents(__DIR__.'/../stubs/cookies/cookiemiddleware_use.stub');
 
-        $fileContents = \file_get_contents($middlewarePath);
-        if (!Str::contains($fileContents, $use)) {
-            $fileContents = preg_replace('/(use .+;)([\s]+class)/', "$1\n".\preg_replace("/[ |\t]{2,}/", "", $use)."$2",
-                $fileContents);
+            $fileContents = \file_get_contents($middlewarePath);
+            if (!Str::contains($fileContents, $use)) {
+                $fileContents = preg_replace(
+                    '/(use .+;)([\s]+class)/',
+                    "$1\n".\preg_replace("/[ |\t]{2,}/", "", $use)."$2",
+                    $fileContents
+                );
+            }
+            if (!Str::contains($fileContents, 'protected function addCookieToResponse')) {
+                $fileContents = preg_replace(
+                    '/(class .*[\s\S]{[.|\s|\S]*)(})/',
+                    "$1\n".$middlewareAddCookieToResponse."\n$2",
+                    $fileContents
+                );
+            }
+            if (!Str::contains($fileContents, 'public static function serialized')) {
+                $fileContents = preg_replace(
+                    '/(class .*[\s\S]{[.|\s|\S]*)(})/',
+                    "$1\n".$middlewareSerialized."\n$2",
+                    $fileContents
+                );
+            }
+            \file_put_contents($middlewarePath, $fileContents);
         }
-        if (!Str::contains($fileContents, 'protected function addCookieToResponse')) {
-            $fileContents = preg_replace('/(class .*[\s\S]{[.|\s|\S]*)(})/', "$1\n".$middlewareAddCookieToResponse."\n$2",
-                $fileContents);
-        }
-        if (!Str::contains($fileContents, 'public static function serialized')) {
-            $fileContents = preg_replace('/(class .*[\s\S]{[.|\s|\S]*)(})/', "$1\n".$middlewareSerialized."\n$2",
-                $fileContents);
-        }
-        \file_put_contents($middlewarePath, $fileContents);
 
         $this->warn('Make sure to change the env values for local cookies or add a TLS certificate.');
         $this->info('Cookie patching done.');
@@ -263,6 +283,7 @@ class Patch extends Command
     protected function getOptions()
     {
         return [
+            ['no-xsrf', InputOption::VALUE_NONE, 'Prevents the patching of the xsrf cookie'],
             ['force', 'f', InputOption::VALUE_NONE, 'Overwrite any existing files'],
         ];
     }
