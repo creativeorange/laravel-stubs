@@ -13,7 +13,9 @@ class PublishStubs extends Command
         'cookie.stub',
         'cookiejar.stub',
         'cookieserviceprovider.stub',
-        'cookiemiddleware.stub'
+        'cookiemiddleware_use.stub',
+        'cookiemiddleware_serialized.stub',
+        'cookiemiddleware_addCookieToResponse.stub'
     ];
     /**
      * The name and signature of the console command.
