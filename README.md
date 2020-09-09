@@ -10,13 +10,13 @@ Laravel stubs aims to add some "missing" functionality to the artisan commands t
 
 First, pull in the package through Composer via the command line:
 ```
-composer require creativeorange/laravel-stubs ~1.0
+composer require creativeorange/laravel-stubs ~2.0
 ```
 
 or add the following to your composer.json file and run `composer update`.
 ```
 "require": {
-    "creativeorange/laravel-stubs": "~1.0"
+    "creativeorange/laravel-stubs": "~2.0"
 }
 ```
 
