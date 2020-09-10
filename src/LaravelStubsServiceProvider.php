@@ -41,5 +41,9 @@ class LaravelStubsServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . '/Config/laravel-stubs.php', 'laravel-stubs');
+
+        foreach (glob(app_path() . '/' . \config('laravel-stubs.make.helper.folder') . '/*.php') as $file) {
+            require_once($file);
+        }
     }
 }
