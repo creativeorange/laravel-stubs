@@ -50,6 +50,14 @@ return [
             'namespace' => '\App\Facades'
         ],
         /**
+         * make:helper
+         *
+         * Allows you to change the location of the helpers.
+         */
+        'helper' => [
+            'folder' => 'Helpers'
+        ],
+        /**
          * make:interface
          *
          * Allows you to change the namespace (and so the folder) where the interface will be stored
