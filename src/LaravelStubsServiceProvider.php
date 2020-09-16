@@ -23,6 +23,7 @@ class LaravelStubsServiceProvider extends ServiceProvider
                 Console\Make\MakeViewComposer::class,
                 Console\Make\MakeFacade::class,
                 Console\Make\MakeHelper::class,
+                Console\Make\MakeResponse::class,
                 /** Patch */
                 Console\Patch::class,
                 /** Publish */

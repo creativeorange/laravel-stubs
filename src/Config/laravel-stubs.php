@@ -66,6 +66,14 @@ return [
             'namespace' => '\App\Interfaces'
         ],
         /**
+         * make:response
+         *
+         * Allows you to change the namespace (and so the folder) where the response will be stored
+         */
+        'response' => [
+            'namespace' => '\App\Http\Responses'
+        ],
+        /**
          * make:scope
          *
          * Allows you to change the namespace (and so the folder) where the scope will be stored
